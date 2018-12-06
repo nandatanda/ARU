@@ -38,7 +38,7 @@ def main():
 	startLabel.setTextColor("white")
 	startButton.setFill("green")
 	resultLabel.setTextColor("white")
-	#resultControl.setFill("white")
+	resultControl.setText("I'm ready to go! (^~^;)/")
 	leftButton.setFill(graphics.color_rgb(17, 17, 29))
 	rightButton.setFill(graphics.color_rgb(17, 17, 29))
 	leftButton.setOutline(graphics.color_rgb(17, 17, 29))
@@ -75,6 +75,7 @@ def main():
 				displayed = 0
 				episodes = 0
 				resultLabel.setText(str(displayed) + " of " + str(episodes))
+				resultControl.setText("I'm ready to go! (^~^;)/")
 
 				leftButton.undraw()
 				rightButton.undraw()
@@ -102,24 +103,26 @@ def main():
 				leftLabel.draw(window)
 				rightLabel.draw(window)
 
+				name = nameControl.getText()
 				season = seasonControl.getText()
 				episodes = get_episodes(episodesControl)
+
 				if episodes > 0:
 					displayed = displayed + 1
 
 				resultLabel.setText(str(displayed) + " of " + str(episodes))
-				resultControl.setText("The result will be displayed here.")
 				clearMode = True
 
 		if clearMode:
 			if detect_left(leftButton, click, key) and displayed > 1:
 				displayed = displayed - 1
-				resultLabel.setText(str(displayed) + " of " + str(episodes))
-				resultControl.setText("The result will be displayed here.")
 			elif detect_right(rightButton, click, key) and displayed < episodes:
 				displayed = displayed + 1
-				resultLabel.setText(str(displayed) + " of " + str(episodes))
-				resultControl.setText("The result will be displayed here.")
+
+			result = format(name, season, displayed)
+
+			resultLabel.setText(str(displayed) + " of " + str(episodes))
+			resultControl.setText(result)
 
 	return
 
@@ -173,6 +176,32 @@ def get_episodes(control):
 		return 0
 
 	return int(episodes)
+
+
+def format(name, season, episode):
+	dash = ' - '
+
+	if season:
+		season = int(season)
+		seasonTag = 'S'
+		episodeTag = 'E'
+		space = ' '
+
+		if season < 10:
+			season = '0' + str(season)
+		else:
+			season = str(season)
+	else:
+		seasonTag = ''
+		episodeTag = ''
+		space = ''
+
+	if episode < 10:
+		episode = '0' + str(episode)
+	else:
+		episode = str(episode)
+
+	return name + dash + seasonTag + season + space + episodeTag + episode
 
 
 main()
