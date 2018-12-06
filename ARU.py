@@ -26,6 +26,8 @@ def main():
 	resultControl = graphics.Entry(graphics.Point(260, 340), 25)
 	leftButton = graphics.Rectangle(graphics.Point(5, 370), graphics.Point(30, 395))
 	rightButton = graphics.Rectangle(graphics.Point(100, 370), graphics.Point(125, 395))
+	leftLabel = graphics.Image(graphics.Point(17.5, 382.5), "assets/leftArrow.gif")
+	rightLabel = graphics.Image(graphics.Point(112.5, 382.5), "assets/rightArrow.gif")
 	
 	nameLabel.setTextColor("white")
 	nameControl.setFill("white")
@@ -37,8 +39,10 @@ def main():
 	startButton.setFill("green")
 	resultLabel.setTextColor("white")
 	#resultControl.setFill("white")
-	leftButton.setFill("white")
-	rightButton.setFill("white")
+	leftButton.setFill(graphics.color_rgb(17, 17, 29))
+	rightButton.setFill(graphics.color_rgb(17, 17, 29))
+	leftButton.setOutline(graphics.color_rgb(17, 17, 29))
+	rightButton.setOutline(graphics.color_rgb(17, 17, 29))
 
 	seasonLabel.draw(window)
 	seasonControl.draw(window)
@@ -74,6 +78,8 @@ def main():
 
 				leftButton.undraw()
 				rightButton.undraw()
+				leftLabel.undraw()
+				rightLabel.undraw()
 
 				startButton.undraw()
 				startLabel.undraw()
@@ -93,6 +99,8 @@ def main():
 
 				leftButton.draw(window)
 				rightButton.draw(window)
+				leftLabel.draw(window)
+				rightLabel.draw(window)
 
 				season = seasonControl.getText()
 				episodes = get_episodes(episodesControl)
