@@ -38,7 +38,7 @@ def main():
 	startLabel.setTextColor("white")
 	startButton.setFill("green")
 	resultLabel.setTextColor("white")
-	resultControl.setText("I'm ready to go! (^~^;)/")
+	resultControl.setText(' (^~^;)/   "Ready to go!"')
 	leftButton.setFill(graphics.color_rgb(17, 17, 29))
 	rightButton.setFill(graphics.color_rgb(17, 17, 29))
 	leftButton.setOutline(graphics.color_rgb(17, 17, 29))
@@ -75,7 +75,7 @@ def main():
 				displayed = 0
 				episodes = 0
 				resultLabel.setText(str(displayed) + " of " + str(episodes))
-				resultControl.setText("I'm ready to go! (^~^;)/")
+				resultControl.setText(' (^~^;)/   "Ready to go!"')
 
 				leftButton.undraw()
 				rightButton.undraw()
@@ -107,7 +107,7 @@ def main():
 				season = seasonControl.getText()
 				episodes = get_episodes(episodesControl)
 
-				if episodes > 0:
+				if int(episodes) > 0:
 					displayed = displayed + 1
 
 				resultLabel.setText(str(displayed) + " of " + str(episodes))
@@ -116,13 +116,20 @@ def main():
 		if clearMode:
 			if detect_left(leftButton, click, key) and displayed > 1:
 				displayed = displayed - 1
-			elif detect_right(rightButton, click, key) and displayed < episodes:
+			elif detect_right(rightButton, click, key) and displayed < int(episodes):
 				displayed = displayed + 1
 
-			result = format(name, season, displayed)
+			if name == '' and season == '' and episodes == '0':
+				resultControl.setText(' (o_o*)    "Umm..."')
+			elif name == '':
+				resultControl.setText(' (~_~;)    "Name, baka!"')
+			elif episodes == '0':
+				resultControl.setText(' (~_~;)    "Episodes, baka!!"')
+			else:
+				result = format(name, season, displayed)
 
-			resultLabel.setText(str(displayed) + " of " + str(episodes))
-			resultControl.setText(result)
+				resultLabel.setText(str(displayed) + " of " + str(episodes))
+				resultControl.setText(result)
 
 	return
 
@@ -173,9 +180,9 @@ def detect_right(button, click, key):
 def get_episodes(control):
 	episodes = control.getText()
 	if episodes == '' or int(episodes) < 1:
-		return 0
+		return '0'
 
-	return int(episodes)
+	return episodes
 
 
 def format(name, season, episode):
