@@ -1,4 +1,5 @@
 import graphics
+import os
 
 def main():
 	windowName = "Anime Renaming Utility ~ (A.R.U.)"
@@ -14,6 +15,10 @@ def main():
 	lineY.setFill("white")
 	lineY.draw(window)
 
+	base_folder = os.path.dirname(__file__)
+	left_path = os.path.join(base_folder, 'assets/leftarrow.gif')
+	right_path = os.path.join(base_folder, 'assets/rightarrow.gif')
+
 	nameLabel = graphics.Text(graphics.Point(60, 40), "Name:")
 	nameControl = graphics.Entry(graphics.Point(260, 40), 25)
 	seasonLabel = graphics.Text(graphics.Point(60, 100), "Season:")
@@ -26,8 +31,8 @@ def main():
 	resultControl = graphics.Entry(graphics.Point(260, 340), 25)
 	leftButton = graphics.Rectangle(graphics.Point(5, 370), graphics.Point(30, 395))
 	rightButton = graphics.Rectangle(graphics.Point(100, 370), graphics.Point(125, 395))
-	leftLabel = graphics.Image(graphics.Point(17.5, 382.5), "assets/leftArrow.gif")
-	rightLabel = graphics.Image(graphics.Point(112.5, 382.5), "assets/rightArrow.gif")
+	leftLabel = graphics.Image(graphics.Point(17.5, 382.5), left_path)
+	rightLabel = graphics.Image(graphics.Point(112.5, 382.5), right_path)
 	
 	nameLabel.setTextColor("white")
 	nameControl.setFill("white")
